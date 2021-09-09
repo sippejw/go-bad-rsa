@@ -466,6 +466,13 @@ func (priv *PrivateKey) Precompute() {
 	priv.Precomputed.Dq = new(big.Int).Sub(priv.Primes[1], bigOne)
 	priv.Precomputed.Dq.Mod(priv.D, priv.Precomputed.Dq)
 
+	// Randomly change either Dp or Dq
+	if num, _ := rand.Int(rand.Reader, big.NewInt(1)); num == big.NewInt(1) {
+		priv.Precomputed.Dp.Add(priv.Precomputed.Dp, big.NewInt(1))
+	} else {
+		priv.Precomputed.Dq.Add(priv.Precomputed.Dq, big.NewInt(1))
+	}
+
 	priv.Precomputed.Qinv = new(big.Int).ModInverse(priv.Primes[1], priv.Primes[0])
 
 	r := new(big.Int).Mul(priv.Primes[0], priv.Primes[1])
