@@ -32,7 +32,7 @@ import (
 	"math"
 	"math/big"
 
-	"crypto/internal/randutil"
+	"github.com/sippejw/go-bad-rsa/randutil"
 )
 
 var bigZero = big.NewInt(0)
